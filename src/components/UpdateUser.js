@@ -253,13 +253,6 @@ const buttonStyle = {
   width: "150px",
 };
 
-const imageStyle = {
-  width: "100px",
-  height: "100px",
-  borderRadius: "50%",
-  marginBottom: "10px",
-};
-
 const alertStyle = (msg) => ({
   color: msg.startsWith("❌") ? "#721c24" : "#155724",
   backgroundColor: msg.startsWith("❌") ? "#f8d7da" : "#d4edda",

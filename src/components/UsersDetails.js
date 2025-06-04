@@ -17,7 +17,7 @@ const UserDetails = () => {
 
   useEffect(() => {
     fetchUser();
-  }, [userId]);
+  }, [userId, fetchUser]);
 
   console.log("admin :", user.role);
 
