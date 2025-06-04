@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { AuthContext } from "./AuthContext";
+import React from "react";
+//import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const { user } = useContext(AuthContext); // Optionnel si non utilisé
+  //const { user } = useContext(AuthContext); // Optionnel si non utilisé
 const navigate = useNavigate();
   return (
     <div style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
