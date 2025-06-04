@@ -172,230 +172,255 @@ function App() {
 
   // Main render
   return (
-    <div className={`app ${theme}`}>
+    <div>
       {role === "admin" ? <Navbar /> : <Navbar1 />}
 
       <Routes>
-        {/* Auth Routes */}
-        <Route path="/register" element={<Register setUserEmail={setUserEmail} />} />
+        <Route path="/register"element={<Register setUserEmail={setUserEmail} />}/>
         <Route path="/login" element={<Login setRole={setRole} />} />
         <Route path="/verify" element={<VerifyUser email={userEmail} />} />
-        <Route path="/forgetpassword" element={<ForgetPassword />} />
-        <Route path="/resetpassword/:token" element={<ResetPassword />} />
+        <Route path="/home1" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <button
+                onClick={toggleTheme}
+                className="theme-toggle"
+                aria-label={`Switch to ${
+                  theme === "light" ? "dark" : "light"
+                } mode`}
+              >
+                {theme === "light" ? "🌙" : "☀️"}
+              </button>
+            <div className="app-container">
+              <div className="sidebar left">
+                <CategorySidebar
+                  selectedCategory={selectedCategory}
+                  onSelectCategory={setSelectedCategory}
+                />
+              </div>
 
-        {/* User Routes */}
-        <Route path="/users" element={<GetAllUsers onDelete={handleDelete} />} />
+              <div className="main-content">
+                <SearchBar
+                  searchTerm={searchTerm}
+                  onSearchChange={setSearchTerm}
+                />
+                <BookList
+                  books={filteredBooks}
+                  onSelectBook={(book) =>
+                    navigate(`/book/${book.id}`, { state: { book } })
+                  }
+                  onToggleRead={toggleReadStatus}
+                  onToggleFavorite={toggleFavoriteStatus}
+                />
+              </div>
+
+              <div className="sidebar right">
+                <FilterSidebar
+                  filters={filters}
+                  onFilterChange={setFilters}
+                  readBooks={readBooks}
+                  favoriteBooks={favoriteBooks}
+                  books={books}
+                />
+              </div>
+            </div>
+            </>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <>
+            <button
+                onClick={toggleTheme}
+                className="theme-toggle"
+                aria-label={`Switch to ${
+                  theme === "light" ? "dark" : "light"
+                } mode`}
+              >
+                {theme === "light" ? "🌙" : "☀️"}
+              </button>
+              <div className="app-container">
+                <div className="sidebar left">
+                  <CategorySidebar
+                    selectedCategory={selectedCategory}
+                    onSelectCategory={setSelectedCategory}
+                  />
+                </div>
+
+                <div className="main-content">
+                  <SearchBar
+                    searchTerm={searchTerm}
+                    onSearchChange={setSearchTerm}
+                  />
+                  <BookList
+                    books={filteredBooks}
+                    onSelectBook={(book) =>
+                      navigate(`/book/${book.id}`, { state: { book } })
+                    }
+                    onToggleRead={toggleReadStatus}
+                    onToggleFavorite={toggleFavoriteStatus}
+                  />
+                </div>
+
+                <div className="sidebar right">
+                  <FilterSidebar
+                    filters={filters}
+                    onFilterChange={setFilters}
+                    readBooks={readBooks}
+                    favoriteBooks={favoriteBooks}
+                    books={books}
+                  />
+                </div>
+              </div>
+              </>
+          }
+        />
+        <Route
+          path="/users"
+          element={<GetAllUsers onDelete={handleDelete} />}
+        />
         <Route path="/users/updateUser/:userId" element={<UpdateUser />} />
         <Route path="/users/details/:userId" element={<UserDetails />} />
+        <Route path="/forgetpassword" element={<ForgetPassword />} />
+        <Route path="/resetpassword/:token" element={<ResetPassword />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/updateInfo" element={<UpdateInfo />} />
         <Route path="/changePassword" element={<UpdatePassword />} />
         <Route path="/login/updateUser1/:userId" element={<UpdateUser1 />} />
+      </Routes>
+      {/*pour affichier le meun de user
+      {role === "admin" ? (
+        <></>
+      ) : ( */}
 
-        {/* Book Routes */}
-        <Route path="/" element={
-          <BookLayout 
-            theme={theme}
-            toggleTheme={toggleTheme}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            filteredBooks={filteredBooks}
-            navigate={navigate}
-            toggleReadStatus={toggleReadStatus}
-            toggleFavoriteStatus={toggleFavoriteStatus}
-            filters={filters}
-            setFilters={setFilters}
-            readBooks={readBooks}
-            favoriteBooks={favoriteBooks}
-            books={books}
-          />
-        } />
-        <Route path="/home" element={<Home />} />
-        <Route path="/home1" element={<Home />} />
-        
-        <Route path="/book/:id" element={
-          <BookDetailLayout 
-            theme={theme}
-            toggleTheme={toggleTheme}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            handleBackToList={handleBackToList}
-            filters={filters}
-            setFilters={setFilters}
-            readBooks={readBooks}
-            favoriteBooks={favoriteBooks}
-            books={books}
-          />
-        } />
+      <Routes>
+        <Route
+          path="/reader"
+          element={
+            <>
+              <button
+                onClick={toggleTheme}
+                className="theme-toggle"
+                aria-label={`Switch to ${
+                  theme === "light" ? "dark" : "light"
+                } mode`}
+              >
+                {theme === "light" ? "🌙" : "☀️"}
+              </button>
+              <div className="app-container">
+                <div className="sidebar left">
+                  <CategorySidebar
+                    selectedCategory={selectedCategory}
+                    onSelectCategory={setSelectedCategory}
+                  />
+                </div>
 
-        <Route path="/reader" element={
-          <ReaderLayout 
-            theme={theme}
-            toggleTheme={toggleTheme}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            handleBackToList={handleBackToList}
-            filters={filters}
-            setFilters={setFilters}
-            readBooks={readBooks}
-            favoriteBooks={favoriteBooks}
-            books={books}
-          />
-        } />
+                <div className="main-content">
+                  <BookReaderPage onBack={handleBackToList} />
+                </div>
 
-        {/* Admin Routes */}
+                <div className="sidebar right">
+                  <FilterSidebar
+                    filters={filters}
+                    onFilterChange={setFilters}
+                    readBooks={readBooks}
+                    favoriteBooks={favoriteBooks}
+                    books={books}
+                  />
+                </div>
+              </div>
+            </>
+          }
+        />
+        {/**admin routes for config */}
         <Route path="/Book" element={<AdminBooksPage />} />
         <Route path="/admin/add-book" element={<AddBookForm />} />
         <Route path="/admin/edit-book" element={<EditBookForm />} />
+
+        <Route
+          path="/book/:id"
+          element={
+            <>
+              <button
+                onClick={toggleTheme}
+                className="theme-toggle"
+                aria-label={`Switch to ${
+                  theme === "light" ? "dark" : "light"
+                } mode`}
+              >
+                {theme === "light" ? "🌙" : "☀️"}
+              </button>
+
+              <div className="app-container">
+                <div className="sidebar left">
+                  <CategorySidebar
+                    selectedCategory={selectedCategory}
+                    onSelectCategory={setSelectedCategory}
+                  />
+                </div>
+
+                <div className="main-content">
+                  <BookDetail onBack={handleBackToList} />
+                </div>
+
+                <div className="sidebar right">
+                  <FilterSidebar
+                    filters={filters}
+                    onFilterChange={setFilters}
+                    readBooks={readBooks}
+                    favoriteBooks={favoriteBooks}
+                    books={books}
+                  />
+                </div>
+              </div>
+            </>
+          }
+        />
+
+        <Route
+          path="/Book1"
+          element={
+            <div className="app-container">
+              <div className="sidebar left">
+                <CategorySidebar
+                  selectedCategory={selectedCategory}
+                  onSelectCategory={setSelectedCategory}
+                />
+              </div>
+
+              <div className="main-content">
+                <SearchBar
+                  searchTerm={searchTerm}
+                  onSearchChange={setSearchTerm}
+                />
+                <BookList
+                  books={filteredBooks}
+                  onSelectBook={(book) =>
+                    navigate(`/book/${book.id}`, { state: { book } })
+                  }
+                  onToggleRead={toggleReadStatus}
+                  onToggleFavorite={toggleFavoriteStatus}
+                />
+              </div>
+
+              <div className="sidebar right">
+                <FilterSidebar
+                  filters={filters}
+                  onFilterChange={setFilters}
+                  readBooks={readBooks}
+                  favoriteBooks={favoriteBooks}
+                  books={books}
+                />
+              </div>
+            </div>
+          }
+        />
       </Routes>
     </div>
   );
 }
-
-// Layout components for better organization
-const BookLayout = ({
-  theme,
-  toggleTheme,
-  selectedCategory,
-  setSelectedCategory,
-  searchTerm,
-  setSearchTerm,
-  filteredBooks,
-  navigate,
-  toggleReadStatus,
-  toggleFavoriteStatus,
-  filters,
-  setFilters,
-  readBooks,
-  favoriteBooks,
-  books
-}) => (
-  <>
-    <button
-      onClick={toggleTheme}
-      className="theme-toggle"
-      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-    >
-      {theme === "light" ? "🌙" : "☀️"}
-    </button>
-    <div className="app-container">
-      <div className="sidebar left">
-        <CategorySidebar
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-        />
-      </div>
-      <div className="main-content">
-        <SearchBar
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-        />
-        <BookList
-          books={filteredBooks}
-          onSelectBook={(book) => navigate(`/book/${book.id}`, { state: { book } })}
-          onToggleRead={toggleReadStatus}
-          onToggleFavorite={toggleFavoriteStatus}
-        />
-      </div>
-      <div className="sidebar right">
-        <FilterSidebar
-          filters={filters}
-          onFilterChange={setFilters}
-          readBooks={readBooks}
-          favoriteBooks={favoriteBooks}
-          books={books}
-        />
-      </div>
-    </div>
-  </>
-);
-
-const BookDetailLayout = ({
-  theme,
-  toggleTheme,
-  selectedCategory,
-  setSelectedCategory,
-  handleBackToList,
-  filters,
-  setFilters,
-  readBooks,
-  favoriteBooks,
-  books
-}) => (
-  <>
-    <button
-      onClick={toggleTheme}
-      className="theme-toggle"
-      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-    >
-      {theme === "light" ? "🌙" : "☀️"}
-    </button>
-    <div className="app-container">
-      <div className="sidebar left">
-        <CategorySidebar
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-        />
-      </div>
-      <div className="main-content">
-        <BookDetail onBack={handleBackToList} />
-      </div>
-      <div className="sidebar right">
-        <FilterSidebar
-          filters={filters}
-          onFilterChange={setFilters}
-          readBooks={readBooks}
-          favoriteBooks={favoriteBooks}
-          books={books}
-        />
-      </div>
-    </div>
-  </>
-);
-
-const ReaderLayout = ({
-  theme,
-  toggleTheme,
-  selectedCategory,
-  setSelectedCategory,
-  handleBackToList,
-  filters,
-  setFilters,
-  readBooks,
-  favoriteBooks,
-  books
-}) => (
-  <>
-    <button
-      onClick={toggleTheme}
-      className="theme-toggle"
-      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-    >
-      {theme === "light" ? "🌙" : "☀️"}
-    </button>
-    <div className="app-container">
-      <div className="sidebar left">
-        <CategorySidebar
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-        />
-      </div>
-      <div className="main-content">
-        <BookReaderPage onBack={handleBackToList} />
-      </div>
-      <div className="sidebar right">
-        <FilterSidebar
-          filters={filters}
-          onFilterChange={setFilters}
-          readBooks={readBooks}
-          favoriteBooks={favoriteBooks}
-          books={books}
-        />
-      </div>
-    </div>
-  </>
-);
 
 export default App;
