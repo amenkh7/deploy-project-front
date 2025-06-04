@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { login } from "../api/userService";
 import { AuthContext } from "./AuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -24,15 +24,9 @@ const Login = ({ setRole }) => {
       setUser(data.user);
       console.log("user from login :", data.user);
       setRole(data.user.role);
-      sessionStorage.setItem("token", data.token); // Save token to sessionStorage
-      sessionStorage.setItem("user", JSON.stringify(data.user)); // Save user data to sessionStorage
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("user", JSON.stringify(data.user));
       navigate("/home1");
-      //another option for this fixxx
-      /*if (data.user.role === "client") {
-      navigate("/home1"); // Home page with video background for clients
-    } else {
-      navigate("/home"); // Default home page for other roles
-    }*/
     } catch (err) {
       setError(err.response?.data?.error || "Something went wrong");
     } finally {
@@ -72,7 +66,6 @@ const Login = ({ setRole }) => {
         <h2
           style={{
             textAlign: "center",
-            // color: "wheat",
             color: "#000000",
             fontSize: "28px",
             fontWeight: "700",
@@ -157,18 +150,18 @@ const Login = ({ setRole }) => {
           {loading ? "Logging in..." : "Login"}
         </button>
 
-        <a
-          href="/forgetpassword"
+        <Link
+          to="/forgetpassword"
           style={{ color: "#007bff", marginTop: "10px", textAlign: "center" }}
         >
           Forgot Password?
-        </a>
+        </Link>
 
         <p style={{ textAlign: "center", marginTop: "20px" }}>
           Don't have an account?{" "}
-          <a href="/register" style={{ color: "#007bff" }}>
+          <Link to="/register" style={{ color: "#007bff" }}>
             Sign up
-          </a>
+          </Link>
         </p>
       </form>
     </div>
