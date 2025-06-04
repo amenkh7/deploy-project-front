@@ -63,7 +63,7 @@ const navigate = useNavigate();
           </p>
         </div>
         <button
-  onClick={() => navigate("/home")}
+  onClick={() => navigate("/")}
   style={{
     marginTop: "20px",
     padding: "12px 30px",
