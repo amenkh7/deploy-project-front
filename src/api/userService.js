@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/users";
+const API_URL = "https://deploy-project-back.onrender.com/api/users";
 
 export const getAllUsers = async () => {
   try {
@@ -163,7 +163,7 @@ export const updatePassword = async (email, currentPassword, newPassword) => {
 export const updateUserImage = async (userId, formData) => {
   try {
     const res = await axios.post(
-      `http://localhost:5000/users/update-profile-image/${userId}`,
+      `https://deploy-project-back.onrender.com/users/update-profile-image/${userId}`,
       formData,
       {
         headers: {
@@ -181,7 +181,7 @@ export const updateUserImage = async (userId, formData) => {
 export const updateUserRole = async (email, role) => {
   try {
     const response = await fetch(
-      "http://localhost:5000/api/users/update_role",
+      "https://deploy-project-back.onrender.com/api/users/update_role",
       {
         method: "PUT",
         headers: {

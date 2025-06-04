@@ -80,7 +80,7 @@ const UserDetails = () => {
         >
           <div style={{ marginBottom: "20px" }}>
             <img
-              src={`http://localhost:5000/${user.profileImage}`} // pas de "uploads" en dur
+              src={`https://deploy-project-back.onrender.com/${user.profileImage}`} // pas de "uploads" en dur
               alt="Profile"
               style={{
                 width: "250px",

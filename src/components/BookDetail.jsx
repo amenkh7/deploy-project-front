@@ -12,7 +12,7 @@ const BookDetail = ({ onBack }) => {
 const getImageUrl = (path) => {
     if (!path) return 'https://via.placeholder.com/50x75?text=No+Cover';
     if (path.startsWith('http')) return path;
-    return `${process.env.REACT_APP_API_BASE_URL || 'https://deploy-project-back.onrender.com/'}/${path}`;
+    return `${process.env.REACT_APP_API_BASE_URL || 'https://deploy-project-back.onrender.com'}/${path}`;
   };
   return (
     <div className="book-detail-container">
@@ -67,7 +67,7 @@ const getImageUrl = (path) => {
               onClick={() => window.open(
                   book.livre.startsWith('http') 
                     ? book.livre 
-                    : `http://localhost:5000/${encodeURIComponent(book.livre).replace(/%2F/g, '/')}`,
+                    : `https://deploy-project-back.onrender.com/${encodeURIComponent(book.livre).replace(/%2F/g, '/')}`,
                   '_blank'
                 )}
             >

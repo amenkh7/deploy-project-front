@@ -60,7 +60,7 @@ export const UpdateUser = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/users/uploadImage/${userId}`,
+        `https://deploy-project-back.onrender.com/api/users/uploadImage/${userId}`,
         {
           method: "POST",
           body: formDataImg,
@@ -129,7 +129,7 @@ export const UpdateUser = () => {
             image
               ? fakeImage.startsWith("blob:")
                 ? fakeImage
-                : `http://localhost:5000/${image}`
+                : `https://deploy-project-back.onrender.com/${image}`
               : "https://i.pravatar.cc/120"
           }
           alt="Preview"
@@ -199,7 +199,7 @@ export const UpdateUser = () => {
 
         {/* {image && (
           <img
-            src={`http://localhost:5000/${image}`}
+            src={`https://deploy-project-back.onrender.com/${image}`}
             alt="User"
             style={imageStyle}
           />

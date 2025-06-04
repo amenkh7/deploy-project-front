@@ -77,7 +77,7 @@ const Navbar = () => {
             {/* User Info */}
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <img
-                src={`http://localhost:5000/${user.profileImage}`}
+                src={`https://deploy-project-back.onrender.com/${user.profileImage}`}
                 alt="Profile"
                 style={{
                   width: "40px",

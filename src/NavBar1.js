@@ -70,7 +70,7 @@ const Navbar1 = () => {
         {user && !isLoginPage ? (
           <>
             <img
-              src={`http://localhost:5000/${user.profileImage}`}
+              src={`https://deploy-project-back.onrender.com/${user.profileImage}`}
               alt="Profile"
               style={{
                 width: "40px",

@@ -69,7 +69,7 @@ const AdminBooksPage = () => {
   const getImageUrl = (path) => {
     if (!path) return 'https://via.placeholder.com/50x75?text=No+Cover';
     if (path.startsWith('http')) return path;
-    return `${process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000'}/${path}`;
+    return `${'https://deploy-project-back.onrender.com'}/${path}`;
   };
 
   if (loading) return <div className="text-center py-5" style={{ color: '#e0e0e0' }}>Loading...</div>;

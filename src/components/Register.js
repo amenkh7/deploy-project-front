@@ -74,7 +74,7 @@ export default function Register({ setUserEmail }) {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/users/register",
+        "https://deploy-project-back.onrender.com/api/users/register",
         formData
       );
       setMessage("Registration successful. Now upload your profile image.");
@@ -97,7 +97,7 @@ export default function Register({ setUserEmail }) {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/users/uploadImage/${userId}`,
+        `https://deploy-project-back.onrender.com/api/users/uploadImage/${userId}`,
         {
           method: "POST",
           body: formDataImg,
